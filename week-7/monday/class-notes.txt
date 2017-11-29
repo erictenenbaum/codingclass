@@ -1,0 +1,19 @@
+ajax and APIs
+Use Cases:
+1) Getting and Sending data to/from a centralized database
+2) Provide prebuilt code for a software application (google maps, spotify)
+
+JSON = Javascript Object Notation
+
+ajax is used to get data from an external database. 
+
+ajax Methods:
+
+get requests information from the server
+
+post sends information to the server first and then sends back different information
+
+
+.done in ajax: you don't need to have a .done - why? you don't necessarily have to do anything with the info, but you will almost always use .done
+
+Install prettify for sublime text
