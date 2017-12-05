@@ -1,0 +1,12 @@
+Into to Firebase:
+
+.ref() gives you the ability to add directories or reference directories in your database
+Create
+Read
+Update
+Delete
+
+CRUD
+
+ 
+I think the key "ah-ha!" moment is making the connection that `database.ref().on("value", function(snapshot){}` is just an event listener listening for database value changes in whatever "reference" you specify (in the case of `.ref()`, it listens to the entire database)
