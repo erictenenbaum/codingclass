@@ -2,8 +2,18 @@
 // Make sure to match the configuration to the script version number in the HTML
 // (Ex. 3.0 != 3.7.0)
 
+var config = {
+    apiKey: "AIzaSyA3ORJ4Jc__BhVlA8bKkAOY1dQBKM1oiTs",
+    authDomain: "codersbay-21024.firebaseapp.com",
+    databaseURL: "https://codersbay-21024.firebaseio.com",
+    projectId: "codersbay-21024",
+    storageBucket: "codersbay-21024.appspot.com",
+    messagingSenderId: "792569459630"
+  };
+  firebase.initializeApp(config);
+
 // Assign the reference to the database to a variable named 'database'
-//var database = ...
+var database = firebase.database();
 
 
 // Initial Values
@@ -16,6 +26,23 @@ var highBidder = initialBidder;
 
 //  At the page load and subsequent value changes, get a snapshot of the stored data.
 // This function allows you to update your page in real-time when the firebase database changes.
+
+database.ref().on("value", function(snapshot) {
+	if (snapshot.child("highPrice").exists() && snapshot.child("highBidder").exists()) {
+		highPrice = snapshot.val().highPrice;
+		highBidder = snapshot.val().highBidder;
+
+		$("#highest-bidder").text(highBidder);
+		$("#highest-price").text(highPrice);
+	}
+
+	else {
+
+		$("#highest-bidder").text(highBidder);
+		$("#highest-price").text(highPrice);
+
+	}
+});
 
 
 // If Firebase has a highPrice and highBidder stored (first case)
@@ -46,6 +73,37 @@ var highBidder = initialBidder;
 // --------------------------------------------------------------
 
 // Whenever a user clicks the submit-bid button
+
+$("#submit-bid").on("click", function(){
+
+	event.preventDefault();
+
+	newBid = $("#bidder-price").val().trim();
+	newBidder = $("#bidder-name").val().trim();
+
+	console.log(newBidder);
+	console.log(newBid);
+
+		if (newBid > highPrice) {
+			highPrice = newBid;
+			highBidder = newBidder;
+
+			database.ref().set({
+				highPrice: highPrice,
+				highBidder: highBidder
+			})
+
+		$("#highest-bidder").text(highBidder);
+		$("#highest-price").text(highPrice);
+
+
+		}
+
+		else{
+			alert("sorry your bid was too low");
+		}
+
+})
 
 // prevent form from submitting with event.preventDefault() or returning false
 
