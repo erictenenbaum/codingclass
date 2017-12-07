@@ -1,5 +1,7 @@
 console.log("hello");
 
+console.log(new Date());
+
 var config = {
     apiKey: "AIzaSyBkYYhbLjC2B35-GN31y82S6AhK3lB4u18",
     authDomain: "employeebillrate.firebaseapp.com",
@@ -18,6 +20,7 @@ var rate;
 var role;
 var num = 2;
 var mWorked;
+var totalBilled;
 
 
 
@@ -27,7 +30,19 @@ database.ref().on("child_added", function(snapshot, preChildKey) {
 
 	var newPost = snapshot.val();
 
-	mWorked = newPost.startDate.diff().(moment(), 'months');
+	var a = moment(newPost.startDate);
+	var b = new Date();
+
+	var c = a.diff(b, "days");
+	
+	mWorked = Math.floor(-c / 30);
+	totalBilled = mWorked * newPost.rate;
+
+
+
+	// console.log(d);
+
+	// mWorked = newPost.startDate.diff().(moment(), 'months');
 
 	console.log(mWorked);
 
@@ -47,9 +62,9 @@ database.ref().on("child_added", function(snapshot, preChildKey) {
 											 "<td>" + newPost.name + "</td>" + 
 											"<td>" + newPost.role + "</td>" +
 											"<td>" + newPost.startDate + "</td>" +
-											"<td>" + "12" + "</td>" +
+											"<td>" + mWorked + "</td>" +
 											"<td>" + newPost.rate + "</td>" + 
-											"<td>" + "string" + "</td>" + 
+											"<td>" + '$' + totalBilled + "</td>" + 
 									"</tr>"));
 
 
