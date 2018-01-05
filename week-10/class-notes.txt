@@ -1,0 +1,13 @@
+Class notes Week 10
+First class after break
+
+Examples of serverside code:
+Database
+Node
+API
+User Authentication
+
+
+What is a server?
+The host, where stuff exits
+Process incoming requests
