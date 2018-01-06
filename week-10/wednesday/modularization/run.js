@@ -26,8 +26,8 @@ var bands = require("./bands.js");
 
 
 
-	for(var key in bands) {
-	console.log("A " + key + " band is " + bands[key] + " ")
+	for(var bacon in bands) {
+	console.log("A " + bacon + " band is " + bands[bacon] + " ")
 	}
 
 
