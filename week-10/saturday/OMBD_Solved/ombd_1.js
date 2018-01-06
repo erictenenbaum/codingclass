@@ -10,15 +10,10 @@ var request = require('request');
 
 // Include the request npm package (Don't forget to run "npm install request" in this folder first!)
 // ...
-var movieName = "";
+
 
 // Grab or assemble the movie name and store it in a variable called "movieName"
-for (let i = 2; i < process.argv.length; i++) {
-	movieName += process.argv[i] + " ";
-}
-
-console.log(movieName);
-
+var movieName = process.argv[2];
 // ...
 
 
