@@ -13,7 +13,7 @@ var request = require('request');
 var movieName = "";
 
 // Grab or assemble the movie name and store it in a variable called "movieName"
-for (let i = 2; i < process.argv.length; i++) {
+for (let i = 3; i < process.argv.length; i++) {
 	movieName += process.argv[i] + " ";
 }
 
