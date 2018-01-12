@@ -20,16 +20,27 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }
 
-function zombieRoll(humanHealth, zombieHealth) {
-    console.log("New Round");
-    console.log("Human Health is: " + humanHealth);
-    console.log("Zombie health is: " + zombieHealth);
+function zombieRoll(humanHealth, zombieHealth, swarm) {
+
 
     if (humanHealth <= 0) {
         console.log("You just died dude! Try again next time");
     } else if (zombieHealth <= 0) {
-        console.log("You survived! While not as fun as Nazi Zombies on Call of Duty, that was still sorta fun, right?");
+        // console.log("You survived! While not as fun as Nazi Zombies on Call of Duty, that was still sorta fun, right?");
+        console.log("You've moved on to the next swarm! Stay alert");
+        console.log("======================================================");
+        console.log("======================================================");
+        ++swarm
+        humanHealth = humanHealth + Math.ceil((humanHealth * 0.75));
+        zombieHealth = (15 + (5 * swarm)) - 5;
+
+        zombieRoll(humanHealth, zombieHealth, swarm);;
     } else {
+        console.log("=============================================");
+        console.log("Next Roll");
+        console.log("Current Swarm: " + swarm);
+        console.log("Human Health is: " + humanHealth);
+        console.log("Zombie health is: " + zombieHealth);
 
         inquirer.prompt([{
             type: "list",
@@ -37,31 +48,62 @@ function zombieRoll(humanHealth, zombieHealth) {
             choices: ["1", "2", "3", "4", "5"],
             name: "number"
 
+        }, {
+            type: "list",
+            message: "Choose your weapon",
+            choices: ["bare hands", "knife", "shotgun"],
+            name: "weapon"
         }]).then(number => {
 
             var randomNumber = getRandomIntInclusive(1, 5);
+            function multiplier(weapon) {
+                switch(number.weapon) {
+                    case "bare hands":
+                    return 1
+                    break;
+
+                    case "knife":
+                    return  2
+                    break;
+
+                    case "shotgun":
+                    return  3
+                    break;
+
+                    default:
+                    return  1
+                    break;
+                }
+            }
 
             // console.log(randomNumber);
 
             if (randomNumber == number.number) {
                 console.log("You hit the Zombie! Great shot old sport!");
-                var zHealthDeduction = getRandomIntInclusive(1, 5);
+                
+                var zHealthDeduction = getRandomIntInclusive(1, 5) * multiplier();
+
                 console.log("This much health was taken away from the zombie: " + zHealthDeduction);
+                
 
-
+                swarm = swarm
                 zombieHealth = zombieHealth - zHealthDeduction;
                 humanHealth = humanHealth;
-                zombieRoll(humanHealth, zombieHealth);
+                zombieRoll(humanHealth, zombieHealth, swarm);
 
             } else {
                 console.log("The Zombie hit you! Try to duck or dodge next time");
 
-                var hHealthDeduction = getRandomIntInclusive(1, 5);
-                console.log("This much health was taken from you: " + hHealthDeduction);
 
+                var hHealthDeduction = getRandomIntInclusive(1, 5) * multiplier();
+
+                console.log("This much health was taken from you: " + hHealthDeduction);
+                
+
+                swarm = swarm
                 humanHealth = humanHealth - hHealthDeduction;
                 zombieHealth = zombieHealth;
-                zombieRoll(humanHealth, zombieHealth);
+                zombieRoll(humanHealth, zombieHealth, swarm);
             }
 
         })
@@ -70,4 +112,4 @@ function zombieRoll(humanHealth, zombieHealth) {
 
 }
 
-zombieRoll(70, 15);
+zombieRoll(70, 15, 1);
