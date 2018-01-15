@@ -1,0 +1,14 @@
+{
+  "name": "teammanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "team.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^5.0.0"
+  }
+}
