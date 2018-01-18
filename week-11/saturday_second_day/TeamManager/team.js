@@ -154,30 +154,35 @@ if (count < 6) {
 				name: "wannaSub1"
 			}]).then(answers => {
     // Use user feedback for... whatever!!
-    				if(answers.wannaSub1 === "Yes") {
+    				if(answers.wannaSub1) {
     					console.log("You subbed a player!");
 
-    					var subbedOut = playerArray.pop();
-    					var subbedIn = subArray.pop();
+    					// var subbedOut = playerArray.pop();
+    					// var subbedIn = subArray.pop();
 
-    					playerArray.push(subbedIn);
-    					subArray.push(subbedOut);
+    					// playerArray.push(subbedIn);
+    					// subArray.push(subbedOut);
 
-    					console.log("===================================");
-    					console.log("===================================");
+    					// console.log("===================================");
+    					// console.log("===================================");
 
-    					console.log(playerArray);
+    					// console.log(playerArray);
 
-    					
+    					// subInPlayer();
+    					// subOutPlayer();
 
     					count++
 
     					playGame(count, score);
+
+    					
     				}
     				else {
     					count++
     					playGame(count, score);
     				}
+
+    				
 });
 
 	// count++
@@ -228,6 +233,37 @@ else {
 
 
 	
+}
+
+
+function subInPlayer() {
+	inquirer.prompt([/* Pass your questions in here */
+		{
+			type: "rawlist",
+			message: "Pick the player you want to sub in",
+			name: "subbedInPlayer",
+			choices: subArray
+		}]).then(answers => {
+    // Use user feedback for... whatever!!
+    playerArray.push(answers.subbedInPlayer);
+
+});
+subOutPlayer();
+}
+
+function subOutPlayer () {
+	inquirer.prompt([/* Pass your questions in here */
+		{
+			type: "rawlist",
+			message: "Pick the player you want to sub out",
+			name: "subbedOutPlayer",
+			choices: playerArray
+		}]).then(answers => {
+    // Use user feedback for... whatever!!
+    subArray.push(answers.subbedOutPlayer);
+});
+
+
 }
 
 
