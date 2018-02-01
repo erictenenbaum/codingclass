@@ -1,0 +1,24 @@
+Express Servers
+
+Server can hold a database, route handling, listen, URL parse, send HTML, send JSON
+recieving POSTs, Server side logic
+
+
+Express 
+
+What is a route?
+recieves a request and then defines where to send that info or what to send back
+A route is a map. 
+
+http://nyt-mongo-scraper.herokuapp.com
+
+
+
+GET request
+Gets information from a Server
+
+
+POST request
+Sends information to the server. The server would know what to do with it.
+
+
