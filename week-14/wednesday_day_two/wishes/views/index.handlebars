@@ -1,0 +1,12 @@
+{{#each bacon }}
+<ul>
+<li><p>ID: {{this.id}}</p></li>
+<p>Wish: {{this.wish}}</p>
+</ul>
+{{/each}}
+
+<form action="/" method="POST">
+	<textarea type="text" name="newWish"></textarea>
+
+	<button type="submit">Submit</button>
+</form>
